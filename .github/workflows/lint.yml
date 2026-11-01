@@ -8,7 +8,7 @@ jobs:
       - name: Zainstaluj narzędzia
         run: pip install ansible-lint yamllint
       - name: Zainstaluj kolekcje Ansible
-        run: ansible-galaxy collection install community.general ansible.posix
+        run: ansible-galaxy collection install -r ansible/requirements.yml
       - name: yamllint
         run: yamllint .
       - name: ansible-lint
