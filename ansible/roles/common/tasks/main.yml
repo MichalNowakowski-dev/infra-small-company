@@ -25,3 +25,18 @@
   notify:
     - Sprawdź konfigurację sshd
     - Restart sshd
+
+- name: Utworz uzytkownika admina i dodaj do grupy sudo
+  ansible.builtin.user:
+    name: "{{ common_admin_name }}"
+    password: "{{ common_admin_password_hash }}"
+    groups: sudo
+    append: true
+    create_home: true
+    shell: /bin/bash
+    update_password: on_create
+- name: Dodaj klucz publiczny admina
+  ansible.posix.authorized_key:
+    user: "{{ common_admin_name }}"
+    state: present
+    key: "{{ lookup('file', common_admin_pubkey_file) }}"

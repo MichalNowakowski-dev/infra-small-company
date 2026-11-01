@@ -17,3 +17,7 @@ common_ssh_max_auth_tries: 3
 common_ssh_allow_tcp_forwarding: "no"
 common_ssh_allow_users:
   - vagrant
+  - admin
+
+common_admin_name: "admin"
+common_admin_pubkey_file: ~/.ssh/ansible_ed25519.pub
