@@ -1,0 +1,27 @@
+---
+- name: Zainstaluj pakiety bazowe
+  ansible.builtin.apt:
+    name: "{{ common_packages }}"
+    state: present
+    update_cache: true
+
+- name: Ustaw strefę czasową
+  community.general.timezone:
+    name: "{{ common_timezone }}"
+
+- name: Włącz i uruchom chrony (NTP)
+  ansible.builtin.service:
+    name: chrony
+    state: started
+    enabled: true
+
+- name: Wgraj hardening sshd (drop-in)
+  ansible.builtin.template:
+    src: sshd_hardening.conf.j2
+    dest: /etc/ssh/sshd_config.d/00-hardening.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Sprawdź konfigurację sshd
+    - Restart sshd
