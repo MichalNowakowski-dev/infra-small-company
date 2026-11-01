@@ -1,0 +1,2 @@
+---
+common_admin_password_hash: "{{ vault_common_admin_password_hash }}"

@@ -1,0 +1,9 @@
+---
+- name: Sprawdź konfigurację sshd
+  ansible.builtin.command: /usr/sbin/sshd -t
+  changed_when: false
+
+- name: Restart sshd
+  ansible.builtin.service:
+    name: ssh
+    state: restarted

@@ -1,0 +1,5 @@
+---
+- name: Konfiguracja bazowa wszystkich serwerów
+  hosts: all
+  roles:
+    - common
