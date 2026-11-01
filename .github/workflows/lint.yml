@@ -1,0 +1,15 @@
+name: lint
+on: [push, pull_request]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Zainstaluj narzędzia
+        run: pip install ansible-lint yamllint
+      - name: Zainstaluj kolekcje Ansible
+        run: ansible-galaxy collection install community.general ansible.posix
+      - name: yamllint
+        run: yamllint .
+      - name: ansible-lint
+        run: ansible-lint ansible/
